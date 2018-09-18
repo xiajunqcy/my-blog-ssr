@@ -35,12 +35,10 @@ axios.interceptors.request.use(
 // http response 服务器响应拦截器
 axios.interceptors.response.use(
     (response) => {
+        // 只拦截 axios 请求
         if (!response.data.common) return response
-        console.log('response', response)
+        // console.log('response', response)
         let common = response.data.common
-        if (common.resultCode !== '1') {
-            return Promise.reject(common.resultMsg)
-        }
         return {
             data: response.data.data,
             code: common.resultCode,

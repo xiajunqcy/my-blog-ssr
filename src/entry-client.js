@@ -4,7 +4,9 @@ import { createApp } from './main'
 
 createApp({
     async beforeApp({ router }) {
-        await loadAsyncComponents({ router })
+        await loadAsyncComponents({
+            router
+        })
     },
 
     // afterApp({ app, router, store }) {

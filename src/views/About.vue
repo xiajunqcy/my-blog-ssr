@@ -10,13 +10,13 @@
 
 export default {
     // asyncData({ store, route: { name } }) {
-        // return store.dispatch('FETCH_TEST', { name })
-        // return API_GET_ARTICLE({
-        //     name: name
-        // }).then((data) => {
-        //     store.state.testData = data
-        //     // commit('SET_TEST', data)
-        // })
+    // return store.dispatch('FETCH_TEST', { name })
+    // return API_GET_ARTICLE({
+    //     name: name
+    // }).then((data) => {
+    //     store.state.testData = data
+    //     // commit('SET_TEST', data)
+    // })
     // },
     mounted() {
         // API_GET_ARTICLE().then((data) => {

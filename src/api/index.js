@@ -3,9 +3,9 @@ import fetch from './config/fetch'
 // 接口统一管理
 let BASE_PATH = ''
 if (process.env.NODE_ENV === 'development') {
-    BASE_PATH = 'http://localhost:8088'
     // 本地测试
-    BASE_PATH = '/mock'
+    // npm run mock
+    BASE_PATH = 'http://localhost:8001'
 }
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV)
@@ -28,6 +28,11 @@ export const API_POST_ARTICLE = fetch({
 // 获取文章
 export const API_GET_ARTICLE = fetch({
     url: `${BASE_PATH}/article`,
+    method: 'GET'
+})
+// 首页：获取文章
+export const API_GET_ARTICLES = fetch({
+    url: `${BASE_PATH}/articles`,
     method: 'GET'
 })
 // 修改文章
