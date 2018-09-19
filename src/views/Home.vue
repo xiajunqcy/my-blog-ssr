@@ -23,10 +23,6 @@ export default {
     components: {
         HomeCard
     },
-    mounted() {
-        console.log(123)
-        this.API_GET_ARTICLES()
-    },
     methods: {}
 }
 </script>
