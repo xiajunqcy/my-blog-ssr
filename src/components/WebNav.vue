@@ -1,7 +1,8 @@
 <template>
     <nav class="WebNav">
-            <span v-for="(item,index) in navList"
-                  :key="`navList|${index}`">{{item}}</span>
+        <span v-for="(item,index) in navList"
+              :key="`navList|${index}`"
+              @click="navGo(index)">{{item}}</span>
     </nav>
 </template>
 
@@ -13,6 +14,13 @@ export default {
             type: Array,
             default() {
                 return ['全部', '心得', '代码']
+            }
+        }
+    },
+    methods: {
+        navGo(i) {
+            if (i === 0) {
+                this.$router.push({ name: 'home' })
             }
         }
     }

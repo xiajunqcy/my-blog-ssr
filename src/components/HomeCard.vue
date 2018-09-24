@@ -2,10 +2,11 @@
     <section class="HomeCard">
         <div class="HomeCard__img"></div>
         <div class="HomeCard__content">
-            <h3>Hello World! 你好世界</h3>
-            <p class="HomeCard__content__desc">记得早先少年时 大家诚诚恳恳 说一句，是一句 清早上火车站 长街黑暗无行人 卖豆浆的小店冒着热气 从前的日色变得慢 车，马，邮件都慢 一生只够爱一个人 从前的锁也好看 钥匙精美有样子 你锁了，人家就懂了。 记得早先少年时 大家诚诚恳恳 说一句，是一句 清早上火车站 长街黑暗无行人 卖豆浆的小店冒着热气 从前的日色变得慢 车，马，邮件都慢 一生只够爱一个人 从前的锁也好看 钥匙精美有样子 你锁了，人家就懂了 </p>
-            <p class="HomeCard__content__tag">2018/02/12 心得/代码
-                <span class="HomeCard__content__more">余下全文>></span>
+            <h3>{{item.title}}</h3>
+            <p class="HomeCard__content__desc">{{item.sec}}</p>
+            <p class="HomeCard__content__tag">{{item.updateTime}} {{item.label}}
+                <span class="HomeCard__content__more"
+                      @click="more">余下全文>></span>
             </p>
         </div>
     </section>
@@ -13,7 +14,23 @@
 
 <script>
 export default {
-    name: 'HomeCard'
+    name: 'HomeCard',
+    props: {
+        item: {
+            type: Object,
+            default() {
+                return {}
+            }
+        }
+    },
+    methods: {
+        more() {
+            this.$router.push({
+                name: 'article',
+                params: { _id: this.item._id }
+            })
+        }
+    }
 }
 </script>
 

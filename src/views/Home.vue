@@ -1,8 +1,9 @@
 <template>
-  <div class="home">
-    <HomeCard v-for="(item,index) in articles"
-              :key="`articles|${index}`" />
-  </div>
+    <div class="home">
+        <HomeCard v-for="(item,index) in articles"
+                  :key="`articles|${index}`"
+                  :item="item" />
+    </div>
 </template>
 
 <script>
