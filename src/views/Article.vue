@@ -1,11 +1,24 @@
 <template>
     <div class="Article">
-        <h1>{{$route.params._id}}</h1>
+        <ArticleCard :item="article($route.params._id)"/>>
     </div>
 </template>
 
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+import ArticleCard from '@/components/ArticleCard'
+
+export default {
+    components: {
+        ArticleCard
+    },
+    asyncData({ store, route }) {
+        return store.dispatch('FETCH_ARTICLE', { _id: route.params._id })
+    },
+    computed: {
+        ...mapGetters(['article'])
+    }
+}
 </script>
 
 <style lang="less" scoped>

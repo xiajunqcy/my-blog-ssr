@@ -16,24 +16,36 @@ createApp({
         router.beforeResolve((to, from, next) => {
             console.log('beforeResolve')
             const matched = router.getMatchedComponents(to)
-            const prevMatched = router.getMatchedComponents(from)
-            let diffed = false
+            // const prevMatched = router.getMatchedComponents(from)
+            // let diffed = false
 
             // 我们只关心非预渲染的组件
             // 所以我们对比它们，找出两个匹配列表的差异组件
-            const activated = matched.filter((c, i) => {
-                return diffed || (diffed = prevMatched[i] !== c)
-            })
+            const activated = matched
+            // const activated = matched.filter((c, i) => {
+            //     return diffed || (diffed = prevMatched[i] !== c)
+            // })
             const asyncDataHooks = activated
                 .map((c) => c.asyncData)
                 .filter((_) => _)
             if (!asyncDataHooks.length) {
                 return next()
             }
-
+            // console.log(
+            //     'asyncDataHooks',
+            //     asyncDataHooks[0]({
+            //         store,
+            //         route: to
+            //     })
+            // )
             // 这里如果有加载指示器(loading indicator)，就触发
             Promise.all(
-                asyncDataHooks.map((hook) => hook({ store, route: to }))
+                asyncDataHooks.map((hook) =>
+                    hook({
+                        store,
+                        route: to
+                    })
+                )
             )
                 .then(() => {
                     // 停止加载指示器(loading indicator)

@@ -10,7 +10,9 @@ export function createStore() {
     return new Vuex.Store({
         state() {
             return {
-                articles: []
+                articles: [],
+                API_GET_ARTICLES: false,
+                articles_id: {}
             }
         },
         actions,

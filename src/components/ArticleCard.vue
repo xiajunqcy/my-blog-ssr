@@ -1,12 +1,10 @@
 <template>
-    <section class="HomeCard">
-        <div class="HomeCard__img"></div>
-        <div class="HomeCard__content">
+    <section class="ArticleCard">
+        <div class="ArticleCard__img"></div>
+        <div class="ArticleCard__content">
             <h3>{{item.title}}</h3>
-            <p class="HomeCard__content__desc">{{item.sec}}</p>
-            <p class="HomeCard__content__tag">{{item.updateTime}} {{item.label}}
-                <span class="HomeCard__content__more"
-                      @click="more">余下全文>></span>
+            <p class="ArticleCard__content__desc">{{item.content}}</p>
+            <p class="ArticleCard__content__tag">{{item.updateTime}} {{item.label}}
             </p>
         </div>
     </section>
@@ -14,7 +12,7 @@
 
 <script>
 export default {
-    name: 'HomeCard',
+    name: 'ArticleCard',
     props: {
         item: {
             type: Object,
@@ -36,34 +34,29 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.HomeCard {
+.ArticleCard {
     display: flex;
     background: #eee;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 30px;
     width: 720px;
     margin: 30px auto 0;
-    &__img {
-        width: 160px;
-        height: 160px;
-        background: yellow;
-        flex-shrink: 0;
-    }
+    // &__img {
+    //     width: 120px;
+    //     height: 120px;
+    //     background: yellow;
+    //     flex-shrink: 0;
+    // }
     &__content {
         color: #333;
-        padding: 20px 30px;
+        // padding: 0 42px;
         font-size: 14px;
         h3 {
             margin: 0;
         }
         &__desc {
             line-height: 1.5em;
-            // margin: 12px 0;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
+            margin: 12px 0;
         }
         &__tag {
             color: #999;
