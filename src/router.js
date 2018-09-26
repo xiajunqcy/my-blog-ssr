@@ -23,6 +23,12 @@ export function createRouter() {
                 name: 'article',
                 component: () =>
                     import(/* webpackChunkName: "article" */ './views/Article.vue')
+            },
+            {
+                path: '/editor',
+                name: 'editor',
+                component: () =>
+                    import(/* webpackChunkName: "editor" */ './views/Editor.vue')
             }
         ]
     })

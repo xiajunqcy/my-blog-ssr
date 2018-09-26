@@ -1,6 +1,6 @@
 <template>
     <div class="Article">
-        <ArticleCard :item="article($route.params._id)"/>>
+        <ArticleCard :item="article($route.params._id)"/>
     </div>
 </template>
 

@@ -3,9 +3,8 @@
         <div class="ArticleCard__img"></div>
         <div class="ArticleCard__content">
             <h3>{{item.title}}</h3>
-            <p class="ArticleCard__content__desc">{{item.content}}</p>
-            <p class="ArticleCard__content__tag">{{item.updateTime}} {{item.label}}
-            </p>
+            <p class="ArticleCard__content__desc" v-highlight v-html="this.item.content"></p>
+            <p class="ArticleCard__content__tag">{{item.updateTime}} {{item.label}}</p>
         </div>
     </section>
 </template>
@@ -13,6 +12,17 @@
 <script>
 export default {
     name: 'ArticleCard',
+    directives: {
+        highlight(el) {
+            let blocks = el.querySelectorAll('pre code')
+            if (!window || !window.hljs) return
+            let hljs = window.hljs
+            blocks.forEach((block) => {
+                hljs.highlightBlock(block)
+            })
+        }
+    },
+
     props: {
         item: {
             type: Object,
@@ -21,12 +31,11 @@ export default {
             }
         }
     },
-    methods: {
-        more() {
-            this.$router.push({
-                name: 'article',
-                params: { _id: this.item._id }
-            })
+    methods: {},
+    mounted() {
+        let marked = window.marked
+        if (marked) {
+            this.item.content = marked(this.item.content)
         }
     }
 }
@@ -35,6 +44,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .ArticleCard {
+    /deep/ .hljs {
+        overflow: auto;
+    }
     display: flex;
     background: #eee;
     box-sizing: border-box;
@@ -49,6 +61,7 @@ export default {
     // }
     &__content {
         color: #333;
+        width: 660px;
         // padding: 0 42px;
         font-size: 14px;
         h3 {
