@@ -10,6 +10,7 @@ export function createStore() {
     return new Vuex.Store({
         state() {
             return {
+                tag: '全部',
                 articles: [],
                 API_GET_ARTICLES: false,
                 articles_id: {}

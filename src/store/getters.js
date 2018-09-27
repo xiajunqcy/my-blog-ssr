@@ -1,4 +1,7 @@
 export default {
+    tag(state) {
+        return state.tag
+    },
     articles(state) {
         return state.articles
     },

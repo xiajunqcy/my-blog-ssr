@@ -4,8 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-    <WebHeader/>
     <WebNav/>
+    <WebHeader/>
     <router-view/>
   </div>
 </template>
@@ -22,4 +22,5 @@ export default {
 
 <style lang="less">
 @import './common/style/normalize.css';
+@import './common/style/common.less';
 </style>

@@ -22,4 +22,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.Article {
+    padding-bottom: 50px;
+}
 </style>
