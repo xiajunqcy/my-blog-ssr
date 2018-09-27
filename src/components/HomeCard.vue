@@ -40,6 +40,7 @@ export default {
 @import '../common/style/common.less';
 
 .HomeCard {
+    overflow: hidden;
     transition: all 0.3s;
     display: flex;
     justify-content: space-between;
@@ -92,10 +93,6 @@ export default {
                 margin-right: 10px;
                 border-radius: 99px;
             }
-        }
-        &__more {
-            float: right;
-            cursor: pointer;
         }
     }
 }

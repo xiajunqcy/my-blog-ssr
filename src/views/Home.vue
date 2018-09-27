@@ -35,9 +35,12 @@ export default {
 <style lang="less" scoped>
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity 0.5s;
+    transition: 'max-height' 'padding' 0.3s;
+    max-height: 500px;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 </style>
