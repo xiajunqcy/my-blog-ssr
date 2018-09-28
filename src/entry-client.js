@@ -7,14 +7,30 @@ createApp({
         await loadAsyncComponents({
             router
         })
+
+        // if (to.meta.needLogin) {
+        //     if (!store.getters.loginStatus) {
+        //         alert('请先登录')
+        //         next({
+        //             name: 'home'
+        //         })
+        //     }
+        // }
     },
 
     afterApp({ app, router, store }) {
         // afterApp({ app, store }) {
         store.replaceState(window.__INITIAL_STATE__)
 
+        // 处理刷新后登录状态丢失的情况
+        if (
+            sessionStorage.getItem('loginStatus') === 'T' &&
+            !store.getters.loginStatus
+        ) {
+            store.commit('SET_LOGIN')
+        }
+
         router.beforeResolve((to, from, next) => {
-            console.log('beforeResolve')
             const matched = router.getMatchedComponents(to)
             // const prevMatched = router.getMatchedComponents(from)
             // let diffed = false
@@ -31,13 +47,6 @@ createApp({
             if (!asyncDataHooks.length) {
                 return next()
             }
-            // console.log(
-            //     'asyncDataHooks',
-            //     asyncDataHooks[0]({
-            //         store,
-            //         route: to
-            //     })
-            // )
             // 这里如果有加载指示器(loading indicator)，就触发
             Promise.all(
                 asyncDataHooks.map((hook) =>

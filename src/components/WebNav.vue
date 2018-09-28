@@ -18,20 +18,23 @@ export default {
         return {}
     },
     computed: {
-        ...mapGetters(['tag'])
-    },
-    props: {
-        navList: {
-            type: Array,
-            default() {
-                return ['全部', '心得', '代码']
+        navList() {
+            let arr = ['全部', '心得', '代码']
+            if (this.loginStatus) {
+                arr = ['新增', ...arr]
             }
-        }
+            return arr
+        },
+        ...mapGetters(['tag', 'loginStatus'])
     },
     methods: {
         navGo(item) {
             this.SET_TAG(item)
-            this.$router.push({ name: 'home' })
+            let name = 'home'
+            if (item === '新增') {
+                name = 'editor'
+            }
+            this.$router.push({ name: name })
         },
         ...mapMutations(['SET_TAG'])
     }

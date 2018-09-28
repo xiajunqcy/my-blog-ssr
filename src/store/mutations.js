@@ -8,5 +8,13 @@ export default {
     },
     SET_ARTICLES_ID: (state, data) => {
         state.articles_id[data._id] = data
+    },
+
+    SET_LOGIN(state) {
+        console.log('SET_LOGIN')
+        state.loginStatus = true
+    },
+    SET_LOGOUT(state) {
+        state.loginStatus = false
     }
 }

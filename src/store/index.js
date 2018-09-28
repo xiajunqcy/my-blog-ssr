@@ -10,6 +10,8 @@ export function createStore() {
     return new Vuex.Store({
         state() {
             return {
+                // 登录状态
+                loginStatus: false,
                 tag: '全部',
                 articles: [],
                 API_GET_ARTICLES: false,

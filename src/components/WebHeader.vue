@@ -15,7 +15,9 @@ export default {
 @import '../common/style/common.less';
 
 header {
+    font-family: 'Questrial', sans-serif;
     margin-top: @nav-height;
+    font-size: 18px;
     height: 100px;
     padding-bottom: 20px;
     display: flex;
