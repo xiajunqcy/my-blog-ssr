@@ -15,17 +15,22 @@ import { mapMutations, mapGetters } from 'vuex'
 export default {
     name: 'WebNav',
     data() {
-        return {}
+        return {
+            statusClient: false
+        }
     },
     computed: {
         navList() {
             let arr = ['全部', '心得', '代码']
-            if (this.loginStatus) {
+            if (this.statusClient && this.loginStatus) {
                 arr = ['新增', ...arr]
             }
             return arr
         },
         ...mapGetters(['tag', 'loginStatus'])
+    },
+    mounted() {
+        this.statusClient = true
     },
     methods: {
         navGo(item) {

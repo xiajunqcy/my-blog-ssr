@@ -11,7 +11,6 @@ export default {
         })
     },
     FETCH_ARTICLE: ({ commit, state }, { _id }) => {
-        console.log(state.articles_id[_id])
         if (state.articles_id[_id]) return Promise.resolve()
         return API_GET_ARTICLE({ _id: _id }).then(({ data, code }) => {
             if (code === '1') {

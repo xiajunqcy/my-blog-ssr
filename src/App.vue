@@ -4,9 +4,11 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
-    <WebNav/>
-    <WebHeader/>
-    <router-view/>
+    <!-- <no-ssr> -->
+      <WebNav />
+    <!-- </no-ssr> -->
+    <WebHeader />
+    <router-view />
   </div>
 </template>
 <script>

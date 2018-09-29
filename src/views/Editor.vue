@@ -16,7 +16,7 @@
                     </select>
                 </section>
                 <p>内容：</p>
-                <textarea id="tt"
+                <textarea spellcheck="false"
                           class="Editor-textarea"
                           :style="{height:`${clientHeight}px`}"
                           v-model="articleInfo.content"></textarea>
@@ -32,6 +32,13 @@ import { mapGetters } from 'vuex'
 import ArticleCard from '@/components/ArticleCard'
 
 export default {
+    asyncData({ store, route }) {
+        if (route.params._id) {
+            return store.dispatch('FETCH_ARTICLE', { _id: route.params._id })
+        } else {
+            return Promise.resolve()
+        }
+    },
     data() {
         return {
             articleInfo: {
@@ -41,7 +48,8 @@ export default {
             },
             tags: ['心得', '代码', '其他'],
             timer: undefined,
-            clientHeight: 300
+            clientHeight: 300,
+            statusClient: false
         }
     },
     components: {
@@ -49,6 +57,7 @@ export default {
     },
     created() {},
     mounted() {
+        this.statusClient = true
         if (!this.loginStatus) {
             alert('请先登录！')
             document.localName.href = history.go(-1)
@@ -58,8 +67,9 @@ export default {
                 return false
             }
         }
+
         if (this.$route.params._id) {
-            this.articleInfo = this.article(this.$route.params._id)
+            this.articleInfo = { ...this.article(this.$route.params._id) }
         }
     },
     methods: {
@@ -69,16 +79,16 @@ export default {
     },
     watch: {
         content() {
+            if (!this.statusClient) return
             clearTimeout(this.timer)
             this.timer = setTimeout(() => {
                 this.$refs.ArticleCard.marked()
-                console.log(
-                    document.querySelector('.ArticleCard__content').clientHeight
-                )
                 this.clientHeight = Math.max(
                     300,
-                    // this.$refs.ArticleCard.$el.clientHeight
-                    document.querySelector('.ArticleCard__content').clientHeight
+                    document.querySelector('.ArticleCard__content')
+                        ? document.querySelector('.ArticleCard__content')
+                              .clientHeight
+                        : 300
                 )
             }, 500)
         }
@@ -97,8 +107,12 @@ export default {
 
 .Editor {
     display: flex;
-
+    .ArticleCard {
+        margin-top: 0;
+        border-left: 1px solid #fff;
+    }
     &__area {
+        flex-shrink: 0;
         transition: height 0.3s;
 
         box-sizing: border-box;
