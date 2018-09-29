@@ -31,7 +31,7 @@ export function createRouter() {
                     import(/* webpackChunkName: "admin" */ './views/Admin.vue')
             },
             {
-                path: '/editor',
+                path: '/editor/:_id?',
                 name: 'editor',
                 component: () =>
                     import(/* webpackChunkName: "editor" */ './views/Editor.vue')

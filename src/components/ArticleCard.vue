@@ -1,14 +1,14 @@
 <template>
     <section class="ArticleCard">
-        <h2>{{item.title}}</h2>
+        <h2>{{item.title||'标题'}}</h2>
         <p class="ArticleCard__info">
-            <span class="ArticleCard__info__tag">{{item.tag}}</span>
-            {{item.updateTime}}
+            <span class="ArticleCard__info__tag">{{item.tag||'标签'}}</span>
+            {{item.updateTime||'20XX-XX-XX'}}
         </p>
         <p class="ArticleCard__content"
            v-if="renderFin"
            v-highlight
-           v-html="this.item.content"></p>
+           v-html="content||'内容'"></p>
     </section>
 </template>
 
@@ -17,7 +17,8 @@ export default {
     name: 'ArticleCard',
     data() {
         return {
-            renderFin: false
+            renderFin: false,
+            content: undefined
         }
     },
     directives: {
@@ -35,17 +36,26 @@ export default {
         item: {
             type: Object,
             default() {
-                return {}
+                return {
+                    title: '标题',
+                    tag: '标签',
+                    updateTime: '20XX-XX-XX',
+                    content: '内容'
+                }
             }
         }
     },
-    methods: {},
-    mounted() {
-        let marked = window.marked
-        if (marked && this.item.content) {
-            this.item.content = marked(this.item.content)
-            this.renderFin = true
+    methods: {
+        marked() {
+            let marked = window.marked
+            if (marked && this.item.content) {
+                this.content = marked(this.item.content)
+                this.renderFin = true
+            }
         }
+    },
+    mounted() {
+        this.marked()
     }
 }
 </script>

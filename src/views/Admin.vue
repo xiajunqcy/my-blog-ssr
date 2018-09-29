@@ -22,8 +22,7 @@
             </section>
             </div>
         </div>
-        <!-- <textarea name="" id="" cols="100" rows="50" v-model="content"></textarea>
-        <button @click="save">保存</button> -->
+
     </div>
 
 </template>
@@ -43,9 +42,6 @@ export default {
         }
     },
     methods: {
-        save() {
-            console.log(JSON.stringify(this.content))
-        },
         verify() {
             if (!this.adminInfo.account) {
                 alert('请输入账号！')
