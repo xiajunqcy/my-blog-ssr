@@ -20,7 +20,7 @@
                           class="Editor-textarea"
                           :style="{height:`${clientHeight}px`}"
                           v-model="articleInfo.content"></textarea>
-                <input @click="save" class="Editor-btn" type="button" value="保存">
+                <input @click="saveArticle" class="Editor-btn" type="button" value="保存">
             </section>
                 <ArticleCard :item="articleInfo"
                              ref="ArticleCard" />
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { API_PUT_ARTICLE, API_POST_ARTICLE } from '@/api'
 import { mapGetters } from 'vuex'
 import ArticleCard from '@/components/ArticleCard'
 
@@ -73,8 +74,47 @@ export default {
         }
     },
     methods: {
-        save() {
-            console.log(JSON.stringify(this.content))
+        saveArticle() {
+            if (this.$route.params._id) {
+                this.API_POST_ARTICLE()
+            } else {
+                this.API_PUT_ARTICLE()
+            }
+            // console.log(JSON.stringify(this.content))
+        },
+
+        // 创建文章
+        API_PUT_ARTICLE() {
+            API_PUT_ARTICLE(this.articleInfo)
+                .then(({ data, code, msg }) => {
+                    if (code === '1') {
+                        alert('创建成功')
+                        this.$router.push({
+                            name: 'article',
+                            params: { _id: data._id }
+                        })
+                    } else {
+                        alert(msg)
+                    }
+                })
+                .catch()
+        },
+
+        // 修改文章
+        API_POST_ARTICLE() {
+            API_POST_ARTICLE(this.articleInfo)
+                .then(({ data, code, msg }) => {
+                    if (code === '1') {
+                        alert('修改成功！')
+                        this.$router.push({
+                            name: 'article',
+                            params: { _id: data._id }
+                        })
+                    } else {
+                        alert(msg)
+                    }
+                })
+                .catch()
         }
     },
     watch: {

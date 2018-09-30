@@ -1,16 +1,19 @@
 import axios from 'axios'
-// import Qs from 'qs'
+import Qs from 'qs'
 // import SparkMD5 from 'spark-md5';
 // import Cookies from 'js-cookie';
 
 // 请求的拦截器 定义传参形式
 axios.interceptors.request.use(
     (config) => {
+        
         // 判断请求的类型
         // 如果是 post 请求就把默认参数拼到 data 里面
         // 如果是 get 请求就拼到 params 里面
         // config.withCredentials = true
-        if (config.method === 'post') {
+        if (
+            config.method === 'post'
+        ) {
             // if (config.responseType === 'form') {
             //     const data = Qs.parse(config.data)
             //     config.headers = {
@@ -124,6 +127,7 @@ const afterHandle = (body) => {
 async function axoisHttp({ body, config }) {
     const { url, method, responseType } = config
     const promise = await axios({
+        headers:"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         url,
         method,
         responseType,

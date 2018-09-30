@@ -26,6 +26,7 @@ app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
     res.header('X-Powered-By', ' 3.2.1')
     res.header('Content-Type', 'application/json;charset=utf-8')
+    res.header('Access-control-max-age', 100000) //测试通过
     next()
 })
 app.get('*', (req, res) => {
