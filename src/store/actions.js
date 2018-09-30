@@ -14,7 +14,7 @@ export default {
         if (state.articles_id[_id]) return Promise.resolve()
         return API_GET_ARTICLE({ _id: _id }).then(({ data, code }) => {
             if (code === '1') {
-                commit('SET_ARTICLES_ID', data)
+                commit('SET_ARTICLE_ID', data)
             }
         })
     }

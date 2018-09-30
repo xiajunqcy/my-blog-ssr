@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { API_DELETE_ARTICLE } from '@/api'
 import { mapGetters } from 'vuex'
 import ArticleCard from '@/components/ArticleCard'
 
@@ -31,7 +32,25 @@ export default {
             })
         },
         delArticle() {
-            console.log('delArticle')
+            if (!confirm('确认删除？')) {
+                return
+            }
+            API_DELETE_ARTICLE({ _id: this.$route.params._id })
+                .then(({ code, msg }) => {
+                    if (code === '1') {
+                        alert('删除成功')
+                        this.$store.commit(
+                            'DEL_ARTICLE_ID',
+                            this.$route.params._id
+                        )
+                        this.$router.push({
+                            name: 'home'
+                        })
+                    } else {
+                        alert(msg)
+                    }
+                })
+                .catch()
         }
     }
 }

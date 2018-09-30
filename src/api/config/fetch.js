@@ -6,26 +6,32 @@ import Qs from 'qs'
 // 请求的拦截器 定义传参形式
 axios.interceptors.request.use(
     (config) => {
-        
         // 判断请求的类型
         // 如果是 post 请求就把默认参数拼到 data 里面
         // 如果是 get 请求就拼到 params 里面
         // config.withCredentials = true
         if (
-            config.method === 'post'
+            config.method === 'post' ||
+            config.method === 'put' ||
+            config.method === 'delete'
         ) {
             // if (config.responseType === 'form') {
-            //     const data = Qs.parse(config.data)
-            //     config.headers = {
-            //         'Content-Type': 'application/x-www-form-urlencoded'
-            //     }
-            //     config.data = Qs.stringify({
-            //         ...data
-            //     })
-            // }
+            const data = Qs.parse(config.data)
+            config.headers = {
+                'Content-Type':
+                    'application/x-www-form-urlencoded;charset=utf-8'
+            }
+            config.data = Qs.stringify({
+                ...data
+            })
         } else if (config.method === 'get') {
+            const data = Qs.parse(config.data)
+            config.headers = {
+                'Content-Type':
+                    'application/x-www-form-urlencoded;charset=utf-8'
+            }
             config.params = {
-                ...config.data
+                ...data
             }
         }
         return config
@@ -127,7 +133,6 @@ const afterHandle = (body) => {
 async function axoisHttp({ body, config }) {
     const { url, method, responseType } = config
     const promise = await axios({
-        headers:"Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
         url,
         method,
         responseType,

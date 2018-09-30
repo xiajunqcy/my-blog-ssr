@@ -6,8 +6,12 @@ export default {
     SET_TAG: (state, data) => {
         state.tag = data
     },
-    SET_ARTICLES_ID: (state, data) => {
+    SET_ARTICLE_ID: (state, data) => {
         state.articles_id[data._id] = data
+    },
+    DEL_ARTICLE_ID: (state, _id) => {
+        state.articles = state.articles.filter((item) => item._id !== _id)
+        state.articles_id[_id] = undefined
     },
 
     SET_LOGIN(state) {
