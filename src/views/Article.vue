@@ -18,6 +18,9 @@ export default {
     components: {
         ArticleCard
     },
+    created() {
+        this.$store.commit('SET_TAG', '')
+    },
     asyncData({ store, route }) {
         return store.dispatch('FETCH_ARTICLE', { _id: route.params._id })
     },

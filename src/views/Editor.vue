@@ -45,7 +45,8 @@ export default {
             articleInfo: {
                 title: undefined,
                 tag: undefined,
-                content: undefined
+                content: undefined,
+                sec: undefined
             },
             tags: ['心得', '代码', '其他'],
             timer: undefined,
@@ -74,21 +75,44 @@ export default {
         }
     },
     methods: {
-        saveArticle() {
-            if (this.$route.params._id) {
-                this.API_POST_ARTICLE()
-            } else {
-                this.API_PUT_ARTICLE()
+        checkInfo() {
+            if (!this.articleInfo.title) {
+                alert('请输入标题！')
+                return false
             }
-            // console.log(JSON.stringify(this.content))
+            if (!this.articleInfo.tag) {
+                alert('请选择标签！')
+                return false
+            }
+            if (!this.articleInfo.content) {
+                alert('内容不能为空！')
+                return false
+            }
+            return true
         },
-
-        // 创建文章
+        saveArticle() {
+            if (!this.checkInfo()) return
+            // this.articleInfo.content = JSON.stringify(this.articleInfo.content)
+            this.articleInfo.sec = this.articleSec()
+            if (this.$route.params._id) {
+                this.API_PUT_ARTICLE()
+            } else {
+                this.API_POST_ARTICLE()
+            }
+        },
+        articleSec() {
+            let content = document.querySelector('.ArticleCard__content')
+            content = content.innerText.replace(new RegExp(/\n/g), ' ')
+            return content.slice(0, 300)
+        },
+        // 修改文章
         API_PUT_ARTICLE() {
             API_PUT_ARTICLE(this.articleInfo)
                 .then(({ data, code, msg }) => {
                     if (code === '1') {
-                        alert('创建成功')
+                        alert('修改成功！')
+                        this.$store.commit('SET_ARTICLE_ID', this.articleInfo)
+                        this.$store.commit('UPDATE_ARTICLES')
                         this.$router.push({
                             name: 'article',
                             params: { _id: data._id }
@@ -100,12 +124,14 @@ export default {
                 .catch()
         },
 
-        // 修改文章
+        // 创建文章
         API_POST_ARTICLE() {
             API_POST_ARTICLE(this.articleInfo)
                 .then(({ data, code, msg }) => {
                     if (code === '1') {
-                        alert('修改成功！')
+                        alert('创建成功！')
+                        this.$store.commit('SET_ARTICLE_ID', this.articleInfo)
+                        this.$store.commit('UPDATE_ARTICLES')
                         this.$router.push({
                             name: 'article',
                             params: { _id: data._id }

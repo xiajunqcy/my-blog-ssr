@@ -1,10 +1,10 @@
-import { API_GET_ARTICLES } from '@/api'
+// import { API_GET_ARTICLES } from '@/api'
 import { API_GET_ARTICLE } from '@/api'
 
 export default {
     FETCH_ARTICLES: ({ commit, state }) => {
         if (state.API_GET_ARTICLES) return Promise.resolve()
-        return API_GET_ARTICLES().then(({ data, code }) => {
+        return API_GET_ARTICLE().then(({ data, code }) => {
             if (code === '1') {
                 commit('SET_ARTICLES', data.articleList)
             }

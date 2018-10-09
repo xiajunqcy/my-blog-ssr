@@ -5,8 +5,8 @@
             <span class="ArticleCard__info__tag">{{item.tag||'标签'}}</span>
             {{item.updateTime||'20XX-XX-XX'}}
         </p>
+
         <p class="ArticleCard__content"
-           v-if="renderFin"
            v-highlight
            v-html="content||'内容'"></p>
     </section>
@@ -17,14 +17,13 @@ export default {
     name: 'ArticleCard',
     data() {
         return {
-            renderFin: false,
             content: undefined
         }
     },
     directives: {
         highlight(el) {
-            let blocks = el.querySelectorAll('pre code')
             if (!window || !window.hljs) return
+            let blocks = el.querySelectorAll('pre code')
             let hljs = window.hljs
             blocks.forEach((block) => {
                 hljs.highlightBlock(block)
@@ -50,9 +49,11 @@ export default {
             let marked = window.marked
             if (marked && this.item.content) {
                 this.content = marked(this.item.content)
-                this.renderFin = true
             }
         }
+    },
+    created() {
+        this.content = this.item.content
     },
     mounted() {
         this.marked()

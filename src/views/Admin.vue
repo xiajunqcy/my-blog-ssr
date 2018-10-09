@@ -57,6 +57,7 @@ export default {
             API_POST_LOGIN(this.adminInfo)
                 .then(({ code, msg }) => {
                     if (code === '1') {
+                        console.log(code)
                         alert('登录成功！')
                         sessionStorage.setItem('loginStatus', 'T')
                         this.$store.commit('SET_LOGIN')

@@ -3,6 +3,10 @@ export default {
         state.articles = data
         state.API_GET_ARTICLES = true
     },
+    UPDATE_ARTICLES: (state) => {
+        state.articles = undefined
+        state.API_GET_ARTICLES = false
+    },
     SET_TAG: (state, data) => {
         state.tag = data
     },

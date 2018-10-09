@@ -4,6 +4,7 @@ import Qs from 'qs'
 // import Cookies from 'js-cookie';
 
 // 请求的拦截器 定义传参形式
+axios.defaults.withCredentials = true
 axios.interceptors.request.use(
     (config) => {
         // 判断请求的类型
@@ -114,12 +115,12 @@ const dealElement = (obj) => {
 
 // 去除空格
 const raplaceStrBody = (str) => {
-    let strBody = String(str)
-    if (strBody.indexOf(' ') > -1 || /\r\n/g.test(strBody)) {
-        strBody = strBody.replace(' ', '')
-        strBody = strBody.replace(/\r\n/g, '')
-        strBody = raplaceStrBody(strBody)
-    }
+    let strBody = String(str).replace(/(^\s*)|(\s*$)/g, '')
+    // if (strBody.indexOf(' ') > -1 || /\r\n/g.test(strBody)) {
+    //     strBody = strBody.replace(' ', '')
+    //     strBody = strBody.replace(/\r\n/g, '')
+    //     strBody = raplaceStrBody(strBody)
+    // }
     return strBody
 }
 

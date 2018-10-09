@@ -1,6 +1,6 @@
 <template>
   <header class="WebHeader">
-      <h1>QCY STUDIO</h1>
+      <!-- <h1>QCY STUDIO</h1> -->
   </header>
 </template>
 
@@ -23,7 +23,8 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: @default-color;
     // border-radius: 0 0 10px 10px;
+    background: @default-color url(../assets/qcy_logo.png) no-repeat center;
+    background-size: 210px;
 }
 </style>

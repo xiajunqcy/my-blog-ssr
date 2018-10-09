@@ -8,8 +8,8 @@
             </p>
             <p class="HomeCard__content__desc">{{item.sec}}</p>
         </div>
-        <div class="HomeCard__img"
-             @click="more"></div>
+        <!-- <div class="HomeCard__img"
+             @click="more"></div> -->
     </section>
 </template>
 
