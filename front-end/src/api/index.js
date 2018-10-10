@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development') {
     // 后台测试
     BASE_PATH = 'http://localhost:8088'
 } else {
-    BASE_PATH = 'http://localhost:8088'
+    BASE_PATH = 'http://123.206.16.28:8088'
 }
 
 console.log('process.env.NODE_ENV', process.env.NODE_ENV)
