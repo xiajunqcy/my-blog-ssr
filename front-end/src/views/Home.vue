@@ -43,4 +43,7 @@ export default {
     padding-top: 0;
     padding-bottom: 0;
 }
+.home {
+    padding-bottom: 100px;
+}
 </style>

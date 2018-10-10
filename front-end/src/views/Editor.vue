@@ -48,7 +48,7 @@ export default {
                 content: undefined,
                 sec: undefined
             },
-            tags: ['心得', '代码', '其他'],
+            tags: ['迷思', '技艺'],
             timer: undefined,
             clientHeight: 300,
             statusClient: false

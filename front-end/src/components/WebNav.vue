@@ -21,7 +21,7 @@ export default {
     },
     computed: {
         navList() {
-            let arr = ['全部', '心得', '代码']
+            let arr = ['全部', '迷思', '技艺']
             if (this.statusClient && this.loginStatus) {
                 arr = ['新增', ...arr]
             }
