@@ -66,6 +66,7 @@ export default {
 @import '../common/style/common.less';
 
 .ArticleCard {
+    max-width: 100vw;
     border-radius: 5px;
     /deep/ .hljs {
         overflow: auto;
@@ -96,5 +97,12 @@ export default {
     &__content {
         margin-top: 40px;
     }
+}
+
+@media screen and (max-width: 430px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+  .ArticleCard{
+    padding: 10px;
+    margin-top: 10px;
+  }
 }
 </style>
