@@ -11,7 +11,11 @@ const pkg = require('./package')
 const app = express()
 app.all('*', function (req, res, next) {
   // res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Origin", "http://localhost:8000");
+  if (req.headers.origin == "http://localhost:8000" || req.headers.origin == "http://123.206.16.28:8000") {
+    res.header("Access-Control-Allow-Origin", req.headers.origin)
+  } else {
+    res.header("Access-Control-Allow-Origin", "*")
+  }
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   res.header("Access-Control-Allow-Headers", "Content-Type,XFILENAME,XFILECATEGORY,XFILESIZE");
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
