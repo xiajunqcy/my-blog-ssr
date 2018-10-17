@@ -5,9 +5,9 @@ let BASE_PATH = ''
 if (process.env.NODE_ENV === 'development') {
     // 本地测试
     // npm run mock
-    // BASE_PATH = 'http://localhost:8001'
+    BASE_PATH = 'http://localhost:8001'
     // 后台测试
-    BASE_PATH = 'http://localhost:8088'
+    // BASE_PATH = 'http://localhost:8088'
 } else {
     BASE_PATH = 'http://123.206.16.28:8088'
 }

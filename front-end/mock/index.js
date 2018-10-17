@@ -1,6 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
 
 function getMockJson(req, res, method) {
@@ -8,16 +9,30 @@ function getMockJson(req, res, method) {
     const originalUrl = req.originalUrl
         .split('/')
         [req.originalUrl.split('/').length - 1].split('?')[0]
-    res.status(200).send(
-        fs
+    let data
+    if (
+        fs.existsSync(
+            `${path.join(__dirname, 'json')}/${method}/${originalUrl}.js`
+        )
+    ) {
+        let params = method === 'GET' ? req.query : req.body
+        data = require(`${path.join(
+            __dirname,
+            'json'
+        )}/${method}/${originalUrl}.js`)(params)
+    } else {
+        data = fs
             .readFileSync(
                 `${path.join(__dirname, 'json')}/${method}/${originalUrl}.json`
             )
             .toString('UTF-8')
-    )
+    }
+    res.status(200).send(data)
 }
 app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Origin', 'http://localhost:8000')
+    res.header('Access-Control-Allow-Credentials', true)
     res.header('Access-Control-Allow-Headers', 'X-Requested-With')
     res.header(
         'Access-Control-Allow-Headers',
@@ -29,6 +44,12 @@ app.all('*', function(req, res, next) {
     res.header('Access-control-max-age', 100000) //测试通过
     next()
 })
+app.use(bodyParser.json())
+app.use(
+    bodyParser.urlencoded({
+        extended: true
+    })
+)
 app.get('*', (req, res) => {
     getMockJson(req, res, 'GET')
 })
