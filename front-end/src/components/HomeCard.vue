@@ -98,10 +98,11 @@ export default {
     }
 }
 
-@media screen and (max-width: 430px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
-  .HomeCard{
-    padding: 10px;
-    margin-top: 10px;
-  }
+@media screen and (max-width: 430px) {
+    /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+    .HomeCard {
+        padding: 10px;
+        margin-top: 10px;
+    }
 }
 </style>
